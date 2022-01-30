@@ -1,13 +1,7 @@
 ﻿using Business.Abstract;
-using Business.Concrete;
-using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
 {
@@ -18,7 +12,7 @@ namespace WebAPI.Controllers
         //Loosely coupled
         //naming convention
         //IoC Container -- Inversion of Control
-        IProductService _productService;
+        private IProductService _productService;
 
         public ProductsController(IProductService productService)
         {
@@ -30,13 +24,13 @@ namespace WebAPI.Controllers
         {
             //Swagger
             //Dependency chain --
-            var result =  _productService.GetAll();
+
+            var result = _productService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
-
         }
 
         [HttpGet("getbyid")]
@@ -61,10 +55,5 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-
-
     }
 }
-
-
-//22.05 DERSTEYİZ
